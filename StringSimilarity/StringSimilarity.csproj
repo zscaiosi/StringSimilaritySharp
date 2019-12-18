@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>StringSimilaritySharp</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Caio Saldanha</Authors>
+    <Company>Caio Eduardo Zangirolami Saldanha Software Services</Company>
+  </PropertyGroup>
+
+</Project>
