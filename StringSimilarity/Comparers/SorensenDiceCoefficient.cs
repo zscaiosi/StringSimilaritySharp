@@ -19,8 +19,8 @@ namespace StringSimilarity.Comparers
             if (!AreStringsValid(a, b))
                 return 0.0M;
             
-            a = Regex.Replace(a, @"/\s+/g", "");
-            b = Regex.Replace(b, @"/\s+/g", "");
+            a = Regex.Replace(a, @"\s+", "").ToLower();
+            b = Regex.Replace(b, @"\s+", "").ToLower();
             // Builds up bigrams
             var firstBigrams = new Dictionary<string, int>();
             var secondBigrams = new Dictionary<string, int>();
@@ -28,7 +28,7 @@ namespace StringSimilarity.Comparers
 
             for (var i = 0; i < a.Length - 1; i++)
             {
-                var bigram = a.Substring(i, i + 2);
+                var bigram = a.Substring(i, 2);
                 var count = firstBigrams.ContainsKey(bigram) ?
                     firstBigrams[bigram] + 1
                 :
@@ -39,7 +39,7 @@ namespace StringSimilarity.Comparers
 
             for (var j = 0; j < b.Length - 1; j++)
             {
-                var bigram = b.Substring(j, j + 2);
+                var bigram = b.Substring(j, 2);
                 var count = firstBigrams.ContainsKey(bigram) ?
                     firstBigrams[bigram]
                 :
@@ -52,7 +52,7 @@ namespace StringSimilarity.Comparers
                 }
             }
 
-            return (decimal)(2.0 * intersectionSize) / (a.Length + b.Length);
+            return (decimal)Math.Round((2.0 * intersectionSize) / (a.Length + b.Length - 2), 2);
         }
         /// <summary>
         /// Checks if strings are valid

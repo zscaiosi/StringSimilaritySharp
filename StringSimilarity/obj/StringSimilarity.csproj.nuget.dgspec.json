@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/caio/Documents/Repos/StringSimilarity/StringSimilarity.csproj": {}
+    "/home/caio/Documents/Repos/StringSimilaritySharp/StringSimilarity/StringSimilarity.csproj": {}
   },
   "projects": {
-    "/home/caio/Documents/Repos/StringSimilarity/StringSimilarity.csproj": {
+    "/home/caio/Documents/Repos/StringSimilaritySharp/StringSimilarity/StringSimilarity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/caio/Documents/Repos/StringSimilarity/StringSimilarity.csproj",
-        "projectName": "StringSimilarity",
-        "projectPath": "/home/caio/Documents/Repos/StringSimilarity/StringSimilarity.csproj",
+        "projectUniqueName": "/home/caio/Documents/Repos/StringSimilaritySharp/StringSimilarity/StringSimilarity.csproj",
+        "projectName": "StringSimilaritySharp",
+        "projectPath": "/home/caio/Documents/Repos/StringSimilaritySharp/StringSimilarity/StringSimilarity.csproj",
         "packagesPath": "/home/caio/.nuget/packages/",
-        "outputPath": "/home/caio/Documents/Repos/StringSimilarity/obj/",
+        "outputPath": "/home/caio/Documents/Repos/StringSimilaritySharp/StringSimilarity/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/caio/.nuget/NuGet/NuGet.Config"
