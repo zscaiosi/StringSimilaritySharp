@@ -24,5 +24,19 @@ namespace StringSimilarity.Tests
 
             Assert.True(c >= 0.75M);
         }
+        [Fact]
+        public void IsBestMatch()
+        {
+            matcher = new Matcher(
+                MethodsEnum.SorensenDice,
+                "Caio Eduardo Zangirolami Saldanha",
+                "Caio Edurado Zangirolami Saldanha",
+                "Caio Zangirolami Saldanha"
+            );
+            
+            var r = matcher.GetBestMatch();
+
+            Assert.Equal("Caio Edurado Zangirolami Saldanha", r);
+        }
     }
 }

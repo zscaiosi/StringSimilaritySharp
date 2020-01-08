@@ -1,6 +1,7 @@
 ﻿using System;
 using StringSimilarity.Comparers;
 using StringSimilarity.Enums;
+using System.Linq;
 
 namespace StringSimilarity
 {
@@ -34,7 +35,16 @@ namespace StringSimilarity
 
         public string GetBestMatch()
         {
-            throw new NotImplementedException();
+            switch (_method)
+            {
+                case MethodsEnum.SorensenDice:
+                    var sd = new SorensenDiceCoefficient();
+                    return sd.FindBestMatch(_words[0], _words.Skip(1).ToArray());
+                case MethodsEnum.Levenshtein:
+                    throw new NotImplementedException();
+                default:
+                    throw new ArgumentException();
+            }
         }
     }
 }

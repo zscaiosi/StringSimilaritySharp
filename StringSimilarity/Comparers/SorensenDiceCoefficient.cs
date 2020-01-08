@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using StringSimilarity.Enums;
 using StringSimilarity.Interfaces;
+using System.Linq;
 
 namespace StringSimilarity.Comparers
 {
@@ -81,9 +82,35 @@ namespace StringSimilarity.Comparers
         /// </summary>
         /// <param name="inputs"></param>
         /// <returns></returns>
-        private string FindBestMatch(params string[] inputs)
+        public string FindBestMatch(string baseStr, params string[] inputs)
         {
-            return default(string);
+            var coefficients = new Dictionary<decimal, string>();
+
+            foreach (var i in inputs)
+            {
+                var c = CompareTwoStrings(baseStr, i);
+                // Stores each string with its coefficient
+                coefficients.Add(c, i);
+            }
+
+            var (key, val) = SortCoefficients(coefficients);
+
+            return val;
+        }
+        /// <summary>
+        /// Sorts the found coefficients
+        /// </summary>
+        /// <param name="Dictionary<decimal"></param>
+        /// <param name="dic"></param>
+        protected (decimal, string) SortCoefficients(Dictionary<decimal, string> dic)
+        {
+            decimal[] keys = new decimal[dic.Count];
+
+            dic.Keys.CopyTo(keys, 0);
+
+            Array.Sort(keys);
+
+            return (keys[keys.Length - 1], dic[keys[keys.Length - 1]]);
         }
     }
 }
