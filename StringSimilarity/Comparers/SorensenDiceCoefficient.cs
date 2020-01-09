@@ -10,6 +10,26 @@ namespace StringSimilarity.Comparers
     public class SorensenDiceCoefficient : IStringComparer
     {
         /// <summary>
+        /// Rips off white spaces
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private string Clear(string value)
+        {
+            var build = new System.Text.StringBuilder();
+
+            foreach (var item in value)
+            {
+                if (item != ' ')
+                {
+                    build.Append(char.ToLower(item));
+                }
+            }
+
+            return build.ToString();
+        }
+
+        /// <summary>
         /// Compares two strings
         /// </summary>
         /// <param name="a">Base string</param>
@@ -19,9 +39,10 @@ namespace StringSimilarity.Comparers
         {
             if (!AreStringsValid(a, b))
                 return 0.0M;
-            
-            a = Regex.Replace(a, @"\s+", "").ToLower();
-            b = Regex.Replace(b, @"\s+", "").ToLower();
+
+            a = Clear(a);
+            b = Clear(b);
+
             // Builds up bigrams
             var firstBigrams = new Dictionary<string, int>();
             var secondBigrams = new Dictionary<string, int>();
@@ -30,6 +51,7 @@ namespace StringSimilarity.Comparers
             for (var i = 0; i < a.Length - 1; i++)
             {
                 var bigram = a.Substring(i, 2);
+
                 var count = firstBigrams.ContainsKey(bigram) ?
                     firstBigrams[bigram] + 1
                 :
@@ -62,20 +84,18 @@ namespace StringSimilarity.Comparers
         /// <returns></returns>
         public bool AreStringsValid(params string[] p)
         {
-            var response = true;
-            
-            if ( p.Length % 2 != 0 )
-                response = false;
+            if (p.Length % 2 != 0)
+                return false;
 
             foreach (var _ in p)
             {
                 if (string.IsNullOrEmpty(_))
-                    response = false;
-                if ( _.Length < 2 )
-                    response = false;
+                    return false;
+                if (_.Length < 2)
+                    return false;
             }
 
-            return response;
+            return true;
         }
         /// <summary>
         /// Finds best match in a collection of strings
@@ -84,33 +104,22 @@ namespace StringSimilarity.Comparers
         /// <returns></returns>
         public string FindBestMatch(string baseStr, params string[] inputs)
         {
-            var coefficients = new Dictionary<decimal, string>();
+            decimal currentCoefficient = 0;
+            string value = null;
 
             foreach (var i in inputs)
             {
                 var c = CompareTwoStrings(baseStr, i);
-                // Stores each string with its coefficient
-                coefficients.Add(c, i);
+
+                if (c > currentCoefficient)
+                {
+                    currentCoefficient = c;
+                    value = i;
+                }
+
             }
 
-            var (key, val) = SortCoefficients(coefficients);
-
-            return val;
-        }
-        /// <summary>
-        /// Sorts the found coefficients
-        /// </summary>
-        /// <param name="Dictionary<decimal"></param>
-        /// <param name="dic"></param>
-        protected (decimal, string) SortCoefficients(Dictionary<decimal, string> dic)
-        {
-            decimal[] keys = new decimal[dic.Count];
-
-            dic.Keys.CopyTo(keys, 0);
-
-            Array.Sort(keys);
-
-            return (keys[keys.Length - 1], dic[keys[keys.Length - 1]]);
+            return value;
         }
     }
 }
