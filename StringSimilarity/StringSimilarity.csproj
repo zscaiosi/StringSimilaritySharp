@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <PackageId>StringSimilaritySharp</PackageId>
-    <Version>1.1.0</Version>
+    <Version>2.1.0</Version>
     <Authors>Caio Saldanha</Authors>
     <Company>Caio Eduardo Zangirolami Saldanha Software Services</Company>
   </PropertyGroup>

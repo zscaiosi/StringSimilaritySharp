@@ -19,7 +19,7 @@ namespace StringSimilarity.Tests
         [Fact]
         public void IsGteThreeFourths()
         {
-            matcher = new Matcher(MethodsEnum.SorensenDice, "Silva", "Vasil");
+            matcher = new Matcher(MethodsEnum.SorensenDice, "JOSE FELIPE GONCALVES ROCHA", "JOSE FELIPE G ROCHA");
             var c = matcher.GetCoefficient();
 
             Assert.True(c >= 0.75M);
